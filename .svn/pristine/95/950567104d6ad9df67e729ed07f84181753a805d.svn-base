@@ -190,11 +190,5 @@ namespace GetMQ
         {
 
         }
-
-        public static string xxoo()
-        {
-
-            return "str";
-        }
     }
 }
