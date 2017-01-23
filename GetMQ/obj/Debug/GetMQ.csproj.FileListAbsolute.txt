@@ -1,0 +1,10 @@
+D:\工作\工作\Test\rabbitmq\GetMQ\bin\Debug\GetMQ.exe.config
+D:\工作\工作\Test\rabbitmq\GetMQ\bin\Debug\GetMQ.exe
+D:\工作\工作\Test\rabbitmq\GetMQ\bin\Debug\GetMQ.pdb
+D:\工作\工作\Test\rabbitmq\GetMQ\bin\Debug\Microsoft.Diagnostics.Tracing.EventSource.dll
+D:\工作\工作\Test\rabbitmq\GetMQ\bin\Debug\RabbitMQ.Client.dll
+D:\工作\工作\Test\rabbitmq\GetMQ\bin\Debug\Microsoft.Diagnostics.Tracing.EventSource.xml
+D:\工作\工作\Test\rabbitmq\GetMQ\bin\Debug\RabbitMQ.Client.xml
+D:\工作\工作\Test\rabbitmq\GetMQ\obj\Debug\GetMQ.exe
+D:\工作\工作\Test\rabbitmq\GetMQ\obj\Debug\GetMQ.pdb
+D:\工作\工作\Test\rabbitmq\GetMQ\obj\Debug\GetMQ.csprojResolveAssemblyReference.cache

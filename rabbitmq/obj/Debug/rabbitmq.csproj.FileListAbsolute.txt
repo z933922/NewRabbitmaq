@@ -1,0 +1,10 @@
+D:\工作\工作\Test\rabbitmq\rabbitmq\bin\Debug\rabbitmq.exe.config
+D:\工作\工作\Test\rabbitmq\rabbitmq\bin\Debug\rabbitmq.exe
+D:\工作\工作\Test\rabbitmq\rabbitmq\bin\Debug\rabbitmq.pdb
+D:\工作\工作\Test\rabbitmq\rabbitmq\bin\Debug\Microsoft.Diagnostics.Tracing.EventSource.dll
+D:\工作\工作\Test\rabbitmq\rabbitmq\bin\Debug\RabbitMQ.Client.dll
+D:\工作\工作\Test\rabbitmq\rabbitmq\bin\Debug\Microsoft.Diagnostics.Tracing.EventSource.xml
+D:\工作\工作\Test\rabbitmq\rabbitmq\bin\Debug\RabbitMQ.Client.xml
+D:\工作\工作\Test\rabbitmq\rabbitmq\obj\Debug\rabbitmq.csprojResolveAssemblyReference.cache
+D:\工作\工作\Test\rabbitmq\rabbitmq\obj\Debug\rabbitmq.exe
+D:\工作\工作\Test\rabbitmq\rabbitmq\obj\Debug\rabbitmq.pdb
