@@ -41,53 +41,53 @@ namespace GetMq2
                                      consumer: consumer);
             }
             #endregion
-            #region  老代码
-            //ConnectionFactory newfactory = new ConnectionFactory();
-            ////   newfactory.Password = "123456";
-            ////  newfactory.VirtualHost = "myhost";
-            //newfactory.HostName = "localhost";
+            #region  老代码 直接到队列的   不用设置exchang   直接basicconsume 中的队列名称
+            ConnectionFactory newfactory = new ConnectionFactory();
+            //   newfactory.Password = "123456";
+            //  newfactory.VirtualHost = "myhost";
+            newfactory.HostName = "localhost";
 
-            //using (IConnection connetion = newfactory.CreateConnection())
-            //{
-            //    using (IModel model = connetion.CreateModel())
-            //    {
-            //        var consumer = new EventingBasicConsumer(model);
-            //        consumer.Received += (m, ea) =>
-            //        {
-            //            var body = ea.Body;
-            //            var message = Encoding.UTF8.GetString(body);
-            //            Console.WriteLine("新队列：{0}", message);
+            using (IConnection connetion = newfactory.CreateConnection())
+            {
+                using (IModel model = connetion.CreateModel())
+                {
+                    var consumer = new EventingBasicConsumer(model);
+                    consumer.Received += (m, ea) =>
+                    {
+                        var body = ea.Body;
+                        var message = Encoding.UTF8.GetString(body);
+                        Console.WriteLine("新队列：{0}", message);
 
-            //        };
-            //        while (true)
-            //        {
-            //          model.BasicConsume(
-            //          queue: "1639zz",
-            //          autoAck: true,
-            //          consumer: consumer
-            //          );
+                    };
+                    while (true)
+                    {
+                        model.BasicConsume(
+                        queue: "1639zz",
+                        autoAck: true,
+                        consumer: consumer
+                        );
 
-            //            Thread.Sleep(2000);
-            //        }
+                        Thread.Sleep(2000);
+                    }
 
-            //        #region MyRegion
+                    #region MyRegion
 
-            //        //BasicGetResult result = model.BasicGet("1639zz", true);
-            //        //if (result == null)
-            //        //{
-            //        //    // No message available at this time.
-            //        //}
-            //        //else
-            //        //{
-            //        //    IBasicProperties props = result.BasicProperties;
-            //        //    byte[] body = result.Body;
+                    //BasicGetResult result = model.BasicGet("1639zz", true);
+                    //if (result == null)
+                    //{
+                    //    // No message available at this time.
+                    //}
+                    //else
+                    //{
+                    //    IBasicProperties props = result.BasicProperties;
+                    //    byte[] body = result.Body;
 
-            //        //    Console.WriteLine("新队列： "+System.Text.Encoding.UTF8.GetString(body));
-            //        //} 
-            //        #endregion
+                    //    Console.WriteLine("新队列： "+System.Text.Encoding.UTF8.GetString(body));
+                    //} 
+                    #endregion
 
-            //    }
-            //    } 
+                }
+            }
             #endregion
 
             #region 订阅
@@ -104,6 +104,8 @@ namespace GetMq2
                        autoDelete: false
                        );
                     var queuename = model.QueueDeclare().QueueName;
+                    // 把队列 绑定到exchagn  在producter 端不需要知道队列的名称， 生产者 把信息发送到exchang  然后exchange 把所有的消息发送给
+                    //  和exchange 绑定的 队列
                     model.QueueBind(
                         queue:queuename,
                         exchange: "1221608exchange",
@@ -149,8 +151,10 @@ namespace GetMq2
                     IBasicProperties pro = model.CreateBasicProperties();
                     pro.DeliveryMode = 2;
 
+                    // 这种队列 失去连接后 会自动删除
                     string qnam = model.QueueDeclare().QueueName;
 
+                    //  可以把一个队列绑定到多个路由规则上
                     model.QueueBind(
                       queue: qnam,
                       exchange: "123935exchange",

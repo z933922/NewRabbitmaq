@@ -121,16 +121,18 @@ namespace GetMQ
                     {
                         var body = ea.Body;
                         var message = Encoding.UTF8.GetString(body);
-                        Console.WriteLine("新消息：{0}", message);
+                        Console.WriteLine("新消息:：{0}", message);
                     };
-                    while (false)
-                    {
+   
+                    //while (true)
+                    //{
+                       
                         model.BasicConsume(
                      queue: queuename,
                      autoAck: true,
                      consumer: cusmoer
                      );
-                    }
+                  //  }
 
 
                 }
