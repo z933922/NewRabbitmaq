@@ -13,125 +13,85 @@ namespace GetMq2
     {
         static void Main(string[] args)
         {
-            #region  老代码
-            var factory = new ConnectionFactory() { HostName = "localhost" };
-            using (var connection = factory.CreateConnection())
-            using (var channel = connection.CreateModel())
-            {
-                channel.QueueDeclare(
-                    queue: "zz",
-                    durable: true,
 
-                    exclusive: false,
-                    autoDelete: false,
-                    arguments: null);
-
-
-
-                var consumer = new EventingBasicConsumer(channel);
-                //注册接收事件，一旦创建连接就去拉取消息
-                consumer.Received += (model, ea) =>
-                {
-                    var body = ea.Body;
-                    var message = Encoding.UTF8.GetString(body);
-                    Console.WriteLine(" [x] Received {0}", message);
-                };
-                channel.BasicConsume(queue: "zz",
-                                     autoAck: true,//和tcp协议的ack一样，为false则服务端必须在收到客户端的回执（ack）后才能删除本条消息
-                                     consumer: consumer);
-            }
-            #endregion
             #region  老代码 直接到队列的   不用设置exchang   直接basicconsume 中的队列名称
-            ConnectionFactory newfactory = new ConnectionFactory();
-            //   newfactory.Password = "123456";
-            //  newfactory.VirtualHost = "myhost";
-            newfactory.HostName = "localhost";
+            //ConnectionFactory newfactory = new ConnectionFactory();
+            ////   newfactory.Password = "123456";
+            ////  newfactory.VirtualHost = "myhost";
+            //newfactory.HostName = "localhost";
 
-            using (IConnection connetion = newfactory.CreateConnection())
-            {
-                using (IModel model = connetion.CreateModel())
-                {
-                    var consumer = new EventingBasicConsumer(model);
-                    consumer.Received += (m, ea) =>
-                    {
-                        var body = ea.Body;
-                        var message = Encoding.UTF8.GetString(body);
-                        Console.WriteLine("新队列：{0}", message);
+            //using (IConnection connetion = newfactory.CreateConnection())
+            //{
+            //    using (IModel model = connetion.CreateModel())
+            //    {
+            //        var consumer = new EventingBasicConsumer(model);
+            //        consumer.Received += (m, ea) =>
+            //        {
+            //            var body = ea.Body;
+            //            var message = Encoding.UTF8.GetString(body);
+            //            Console.WriteLine("新队列：{0}", message);
 
-                    };
-                    while (true)
-                    {
-                        model.BasicConsume(
-                        queue: "1639zz",
-                        autoAck: true,
-                        consumer: consumer
-                        );
+            //        };
+            //        while (true)
+            //        {
+            //            model.BasicConsume(
+            //            queue: "1639zz",
+            //            autoAck: true,
+            //            consumer: consumer
+            //            );
 
-                        Thread.Sleep(2000);
-                    }
-
-                    #region MyRegion
-
-                    //BasicGetResult result = model.BasicGet("1639zz", true);
-                    //if (result == null)
-                    //{
-                    //    // No message available at this time.
-                    //}
-                    //else
-                    //{
-                    //    IBasicProperties props = result.BasicProperties;
-                    //    byte[] body = result.Body;
-
-                    //    Console.WriteLine("新队列： "+System.Text.Encoding.UTF8.GetString(body));
-                    //} 
-                    #endregion
-
-                }
-            }
+            //            Thread.Sleep(2000);
+            //        }
+            //    }
+            // }
             #endregion
 
             #region 订阅
-            ConnectionFactory subfactory = new ConnectionFactory();
-            subfactory.HostName = "localhost";
-            using (IConnection connection=subfactory.CreateConnection())
+            if (false)
             {
-                using (IModel model=connection.CreateModel())
+                ConnectionFactory subfactory = new ConnectionFactory();
+                subfactory.HostName = "localhost";
+                using (IConnection connection = subfactory.CreateConnection())
                 {
-                    model.ExchangeDeclare(
-                       exchange: "1221608exchange",
-                       type: "fanout",
-                       durable: true,
-                       autoDelete: false
-                       );
-                    var queuename = model.QueueDeclare().QueueName;
-                    // 把队列 绑定到exchagn  在producter 端不需要知道队列的名称， 生产者 把信息发送到exchang  然后exchange 把所有的消息发送给
-                    //  和exchange 绑定的 队列
-                    model.QueueBind(
-                        queue:queuename,
-                        exchange: "1221608exchange",
-                        routingKey:"",
-                        arguments:null
-                        );
+                    using (IModel model = connection.CreateModel())
+                    {
+                        model.ExchangeDeclare(
+                           exchange: "20181009exchange",
+                           type: "fanout",
+                           durable: true,
+                           autoDelete: false
+                           );
+                        var queuename = model.QueueDeclare().QueueName;
+                        // 把队列 绑定到exchagn  在producter 端不需要知道队列的名称， 生产者 把信息发送到exchang  然后exchange 把所有的消息发送给
+                        //  和exchange 绑定的 队列
+                        model.QueueBind(
+                            queue: queuename,
+                            exchange: "20181009exchange",
+                            routingKey: "",
+                            arguments: null
+                            );
 
-                    var cusmoer = new EventingBasicConsumer(model);
-                    cusmoer.Received += (m, ea) =>
-                    {
-                        var body = ea.Body;
-                        var message = Encoding.UTF8.GetString(body);
-                        Console.WriteLine("新消息：{0}", message);
-                    };
-                    while (false)
-                    {
-                        model.BasicConsume(
-                     queue: queuename,
-                     autoAck: true,
-                     consumer: cusmoer
-                     );
+                        var cusmoer = new EventingBasicConsumer(model);
+                        cusmoer.Received += (m, ea) =>
+                        {
+                            var body = ea.Body;
+                            var message = Encoding.UTF8.GetString(body);
+                            Console.WriteLine("新消息：{0}", message);
+                        };
+                        while (true)
+                        {
+                            model.BasicConsume(
+                         queue: queuename,
+                         autoAck: true,
+                         consumer: cusmoer
+                         );
+                        }
+
                     }
-                 
-
                 }
+                Console.ReadKey();
             }
+        
             #endregion
 
             #region  routing

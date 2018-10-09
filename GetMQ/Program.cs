@@ -96,6 +96,8 @@ namespace GetMQ
             #endregion
 
             #region 订阅
+            if(false)
+            { 
             ConnectionFactory subfactory = new ConnectionFactory();
             subfactory.HostName = "localhost";
             using (IConnection connection = subfactory.CreateConnection())
@@ -103,15 +105,15 @@ namespace GetMQ
                 using (IModel model = connection.CreateModel())
                 {
                     model.ExchangeDeclare(
-                       exchange: "1221608exchange",
-                       type: "fanout",
+                       exchange: "20181009exchange",
+                       type: ExchangeType.Fanout,
                        durable: true,
                        autoDelete: false
                        );
                     var queuename = model.QueueDeclare().QueueName;
                     model.QueueBind(
                         queue: queuename,
-                        exchange: "1221608exchange",
+                        exchange: "20181009exchange",
                         routingKey: "",
                         arguments: null
                         );
@@ -123,19 +125,18 @@ namespace GetMQ
                         var message = Encoding.UTF8.GetString(body);
                         Console.WriteLine("新消息:：{0}", message);
                     };
-   
-                    //while (true)
-                    //{
-                       
+                    while (true)
+                    {
                         model.BasicConsume(
-                     queue: queuename,
-                     autoAck: true,
-                     consumer: cusmoer
-                     );
-                  //  }
-
-
+                 queue: queuename,
+                 autoAck: true,
+                 consumer: cusmoer
+                 );
+                    }
                 }
+            }
+
+            Console.ReadKey();
             }
             #endregion
 

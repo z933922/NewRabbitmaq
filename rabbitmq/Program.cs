@@ -45,53 +45,55 @@ namespace rabbitmq
             #endregion
 
             #region  新代码    直接发送到队列的
-            ConnectionFactory newfactory = new ConnectionFactory();
-            newfactory.HostName = "localhost";
-            using (IConnection connetion = newfactory.CreateConnection())
-            {
-                using (IModel model = connetion.CreateModel())
-                {
-                    model.ExchangeDeclare(
-                        exchange: "1639exchange",
-                        type: ExchangeType.Direct,
-                        durable: true,
-                        autoDelete: false,
-                        arguments: null
-                        );
+            //ConnectionFactory newfactory = new ConnectionFactory();
+            //newfactory.HostName = "localhost";
+            //using (IConnection connetion = newfactory.CreateConnection())
+            //{
+            //    using (IModel model = connetion.CreateModel())
+            //    {
+            //        model.ExchangeDeclare(
+            //            exchange: "1639exchange",
+            //            type: ExchangeType.Direct,
+            //            durable: true,
+            //            autoDelete: false,
+            //            arguments: null
+            //            );
 
-                    model.QueueDeclare(
-                        queue: "1639zz",
-                        durable: true,
-                        exclusive: false,
-                        autoDelete: false,
-                        arguments: null
-                        );
-                    IBasicProperties props = model.CreateBasicProperties();
-                    props.DeliveryMode = 2;
+            //        model.QueueDeclare(
+            //            queue: "1639zz",
+            //            durable: true,
+            //            exclusive: false,
+            //            autoDelete: false,
+            //            arguments: null
+            //            );
+            //        IBasicProperties props = model.CreateBasicProperties();
+            //        props.DeliveryMode = 2;
 
-                    // 一直可以 向队列里面写入数据
-                    while (true)
-                    {
-                        Console.Write("输入要发送的队列信息 ：");
-                        string shuren = Console.ReadLine();
-                        Console.WriteLine("队列信息：" + shuren);
-                        System.Threading.Thread.Sleep(3000);
-                        model.BasicPublish(
-                             exchange: "",
-                             routingKey: "1639zz",
-                             basicProperties: props,
-                             body: Encoding.UTF8.GetBytes(shuren)
-                            );
+            //        // 一直可以 向队列里面写入数据
+            //        while (false)
+            //        {
+            //            Console.Write("输入要发送的队列信息 ：");
+            //            string shuren = Console.ReadLine();
+            //            Console.WriteLine("队列信息：" + shuren);
+            //            System.Threading.Thread.Sleep(3000);
+            //            model.BasicPublish(
+            //                 exchange: "",
+            //                 routingKey: "1639zz",
+            //                 basicProperties: props,
+            //                 body: Encoding.UTF8.GetBytes(shuren)
+            //                );
 
-                        Console.WriteLine("发送成功");
-                        Console.WriteLine("");
-                    }
-                }
-            }
+            //            Console.WriteLine("发送成功");
+            //            Console.WriteLine("");
+            //        }
+            //    }
+            //}
             #endregion
 
 
             #region  发布代码 广播发送的
+            if (false)
+            {
             ConnectionFactory publicfactory = new ConnectionFactory();
             publicfactory.HostName = "localhost";
 
@@ -100,8 +102,8 @@ namespace rabbitmq
                 using (IModel model=connection.CreateModel())
                 {
                     model.ExchangeDeclare(
-                        exchange:"1221608exchange",
-                        type:"fanout",
+                        exchange: "20181009exchange",
+                        type: ExchangeType.Fanout,
                         durable:true,
                         autoDelete:false
                         );
@@ -129,12 +131,12 @@ namespace rabbitmq
                     //  如果在发送消息的时候 没有队列绑定到exchagn  那么该条信息会被删除。 
                     IBasicProperties pro =   model.CreateBasicProperties();
                     pro.DeliveryMode = 2;
-                    while (false)
+                    while (true)
                     {
                         Console.Write("请输入要消息队列信息：");
                         string str = Console.ReadLine();
                         model.BasicPublish(
-                            exchange: "1221608exchange",
+                            exchange: "20181009exchange",
                             routingKey: "",
                             basicProperties: pro,
                             body: System.Text.Encoding.UTF8.GetBytes(str)
@@ -144,9 +146,12 @@ namespace rabbitmq
                     }
                 }
             }
+            }
             #endregion
 
             #region 重新测试 发布订阅的情况
+            if (false)
+            {
             ConnectionFactory Faccon = new ConnectionFactory(); // 工厂
             Faccon.HostName = "localhost";
             using (IConnection connection=Faccon.CreateConnection()) //创建连接
@@ -180,7 +185,7 @@ namespace rabbitmq
                     }
                 }
             }
-
+            }
             #endregion
 
 

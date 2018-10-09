@@ -8,3 +8,15 @@ D:\工作\工作\Test\rabbitmq\rabbitmq\bin\Debug\RabbitMQ.Client.xml
 D:\工作\工作\Test\rabbitmq\rabbitmq\obj\Debug\rabbitmq.csprojResolveAssemblyReference.cache
 D:\工作\工作\Test\rabbitmq\rabbitmq\obj\Debug\rabbitmq.exe
 D:\工作\工作\Test\rabbitmq\rabbitmq\obj\Debug\rabbitmq.pdb
+D:\mywork\myselfdoc\NewRabbitmaq\rabbitmq\bin\Debug\rabbitmq.exe.config
+D:\mywork\myselfdoc\NewRabbitmaq\rabbitmq\bin\Debug\rabbitmq.exe
+D:\mywork\myselfdoc\NewRabbitmaq\rabbitmq\bin\Debug\rabbitmq.pdb
+D:\mywork\myselfdoc\NewRabbitmaq\rabbitmq\bin\Debug\Microsoft.Diagnostics.Tracing.EventSource.dll
+D:\mywork\myselfdoc\NewRabbitmaq\rabbitmq\bin\Debug\RabbitMQ.Client.dll
+D:\mywork\myselfdoc\NewRabbitmaq\rabbitmq\bin\Debug\Microsoft.Diagnostics.Tracing.EventSource.xml
+D:\mywork\myselfdoc\NewRabbitmaq\rabbitmq\bin\Debug\RabbitMQ.Client.xml
+D:\mywork\myselfdoc\NewRabbitmaq\rabbitmq\obj\Debug\rabbitmq.csprojAssemblyReference.cache
+D:\mywork\myselfdoc\NewRabbitmaq\rabbitmq\obj\Debug\rabbitmq.csproj.CoreCompileInputs.cache
+D:\mywork\myselfdoc\NewRabbitmaq\rabbitmq\obj\Debug\rabbitmq.csproj.CopyComplete
+D:\mywork\myselfdoc\NewRabbitmaq\rabbitmq\obj\Debug\rabbitmq.exe
+D:\mywork\myselfdoc\NewRabbitmaq\rabbitmq\obj\Debug\rabbitmq.pdb

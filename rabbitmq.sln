@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2041
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rabbitmq", "rabbitmq\rabbitmq.csproj", "{62A48FA9-CECE-4F48-B102-B0EB4E2D8820}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rabbitmqSend", "rabbitmq\rabbitmqSend.csproj", "{62A48FA9-CECE-4F48-B102-B0EB4E2D8820}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetMQ", "GetMQ\GetMQ.csproj", "{66937513-99CD-4A7F-8824-2715D246705B}"
 EndProject
@@ -33,5 +33,6 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		VisualSVNWorkingCopyRoot = .
+		SolutionGuid = {0795630B-A25D-4169-8BBC-FEAABB0E7501}
 	EndGlobalSection
 EndGlobal
